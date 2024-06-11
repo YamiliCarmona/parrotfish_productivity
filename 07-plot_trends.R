@@ -152,3 +152,5 @@ community_data |>
   theme(axis.text.x = element_text(color = c("red", "green", "yellow", "blue"))) +  # X-axis text color based on stress events
   facet_grid(region ~ species) +
   theme(legend.position = "none")
+
+# ggsave("herb/turnover_herbivoros_spp_.png", width = 12, height = 8, dpi=1000)

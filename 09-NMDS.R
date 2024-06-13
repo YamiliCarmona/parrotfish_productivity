@@ -88,4 +88,16 @@ community_matrix[] <- lapply(community_matrix, as.numeric)
 diversity_indices <- diversity(as.matrix(community_matrix), index = "shannon")
 print(diversity_indices)
 
+# Estandarizar y calcular la matriz de distancia
+community_std <- wisconsin(community_matrix ^ 0.25)
+community_dist <- vegdist(community_std, 'bray')
 
+# Ejecutar PERMANOVA con adonis2
+adonis2_result <- adonis2(community_dist ~ region, data = community_matrix, method = 'bray', permutations = 999)
+print(adonis2_result)
+
+
+# Evaluar la dispersión de la beta diversidad
+community_perm <- betadisper(community_dist, community_matrix$region)
+plot(community_perm)
+anova(community_perm)
